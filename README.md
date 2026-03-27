@@ -21,4 +21,4 @@ Architecture flow:
     Analytics tables
         │
         ▼
-    Dashboard (Metabase)
+    Dashboard (Metabase) / ML model
