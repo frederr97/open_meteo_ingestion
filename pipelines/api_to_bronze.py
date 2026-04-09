@@ -1,12 +1,6 @@
-import requests
 import json
-from datetime import datetime
-
-import openmeteo_requests
-
-import pandas as pd
-import requests_cache
-from retry_requests import retry
+import requests
+import time
 
 def fetch_weather_data(latitude: float, longitude: float, start_date: str, end_date: str) -> dict:
     """
@@ -21,11 +15,6 @@ def fetch_weather_data(latitude: float, longitude: float, start_date: str, end_d
     Returns:
         Dictionary containing the API response
     """
-    # Setup the Open-Meteo API client with cache and retry on error
-    cache_session = requests_cache.CachedSession('.cache', expire_after = -1)
-    retry_session = retry(cache_session, retries = 5, backoff_factor = 0.2)
-    openmeteo = openmeteo_requests.Client(session = retry_session)
-
     base_url = "https://archive-api.open-meteo.com/v1/archive"
     
     params = {
@@ -37,8 +26,32 @@ def fetch_weather_data(latitude: float, longitude: float, start_date: str, end_d
         "timezone": "UTC"
     }
     
-    try:
-        responses = openmeteo.weather_api(base_url, params = params)
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching data: {e}")
-        return None
+    for attempt in range(5):
+        try:
+            response = requests.get(base_url, params=params)
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            if attempt == 4:
+                print(f"Error fetching data after 5 attempts: {e}")
+                return None
+            time.sleep(0.2 * (2 ** attempt))
+
+def main():
+    """Main function to run the weather data fetching pipeline."""
+    latitude = 52.52
+    longitude = 13.41
+    start_date = "2023-01-01"
+    end_date = "2023-01-02"
+    
+    response = fetch_weather_data(latitude, longitude, start_date, end_date)
+    
+    if response:
+        print("Weather data fetched successfully")
+        with open("weather_data.json", "w") as f:
+            json.dump(response, f, indent=2, default=str)
+        print("Data written to weather_data.json")
+    else:
+        print("Failed to fetch weather data")
+
+if __name__ == "__main__":
+    main()
