@@ -1,9 +1,11 @@
 import requests
 import time
+import json
+from pathlib import Path
 
-class IngestionManager:
+class Ingestion:
     """Manager class for handling data ingestion operations."""
-    
+
     def __init__(self):
         """Initialize the IngestionManager."""
         pass
@@ -31,3 +33,21 @@ class IngestionManager:
                     print(f"Error fetching data after {retries} attempts: {e}")
                     return None
                 time.sleep(backoff_factor * (2 ** attempt))
+
+    def load_cities(self):
+        """
+        Load cities and their coordinates from config file.
+        
+        Returns:
+            Dictionary with city names as keys and dicts with latitude/longitude as values
+        """
+        config_path = Path(__file__).parent.parent / "config" / "cities.json"
+        try:
+            with open(config_path) as f:
+                return json.load(f)
+        except FileNotFoundError:
+            print(f"Config file not found: {config_path}")
+            return {}
+        except json.JSONDecodeError as e:
+            print(f"Error parsing config file: {e}")
+            return {}
