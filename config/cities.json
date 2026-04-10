@@ -11,7 +11,7 @@
         "latitude": 48.8566,
         "longitude": 2.3522
     },
-    "roma": {
+    "rome": {
         "latitude": 41.9028,
         "longitude": 12.4964
     },
@@ -19,19 +19,19 @@
         "latitude": 41.3851,
         "longitude": 2.1734
     },
-    "lisboa": {
+    "lisbon": {
         "latitude": 38.7169,
         "longitude": -9.1393
     },
-    "praga": {
+    "prague": {
         "latitude": 50.0755,
         "longitude": 14.4378
     },
-    "viena": {
+    "vienna": {
         "latitude": 48.2082,
         "longitude": 16.3738
     },
-    "budapeste": {
+    "budapest": {
         "latitude": 47.4979,
         "longitude": 19.0402
     },
@@ -39,11 +39,11 @@
         "latitude": 53.3331,
         "longitude": -6.2489
     },
-    "bruxelas": {
+    "brussels": {
         "latitude": 50.8503,
         "longitude": 4.3517
     },
-    "copenhague": {
+    "copenhagen": {
         "latitude": 55.6761,
         "longitude": 12.5683
     }
