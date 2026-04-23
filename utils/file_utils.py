@@ -7,19 +7,18 @@ class FileUtils:
     """Utility class for file operations."""
 
     @staticmethod
-    def write_json(data: Any, filepath: Union[str, Path], indent: int = 2) -> None:
+    def write_json(data: Any, filepath: Union[str, Path]) -> None:
         """
         Write data to a JSON file.
         
         Args:
             data: Data to serialize to JSON
             filepath: Path where the JSON file will be written
-            indent: Number of spaces for indentation (default: 2)
         """
         filepath = Path(filepath)
         filepath.parent.mkdir(parents=True, exist_ok=True)
         with open(filepath, "w") as f:
-            json.dump(data, f, indent=indent)
+            json.dump(data, f)
 
     @staticmethod
     def read_json(filepath: Union[str, Path]) -> Any:
