@@ -1,0 +1,16 @@
+[project]
+name = "open_meteo_ingestion"
+version = "0.1.0"
+description = "Open Meteo data ingestion utilities"
+requires-python = ">=3.10"
+dependencies = [
+    "requests"
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["utils*"]
