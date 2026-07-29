@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "Open Meteo data ingestion utilities"
 requires-python = ">=3.10"
 dependencies = [
-    "requests"
+    "requests",
+    "psycopg2-binary",
+    "python-dotenv"
 ]
 
 [build-system]
