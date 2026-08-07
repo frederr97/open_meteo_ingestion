@@ -6,7 +6,8 @@ requires-python = ">=3.10"
 dependencies = [
     "requests",
     "psycopg2-binary",
-    "python-dotenv"
+    "python-dotenv",
+    "pandas"
 ]
 
 [build-system]
